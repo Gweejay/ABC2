@@ -1,5 +1,3 @@
-import jdk.nashorn.internal.runtime.Undefined;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -57,7 +55,6 @@ public class HttpServer {
         }
 
         private void writeResponse(String str) throws Throwable {
-
             /* История запросов */
             try (FileWriter writer = new FileWriter ("History.txt", true)) {
                 DateFormat dateFormat = new SimpleDateFormat (" dd/MM/yy HH:mm");
@@ -67,29 +64,31 @@ public class HttpServer {
             }
 
             str = "<html>\r\n<body>\r\n<h1>\r\n" + str + "\r\n</h1>\r\n</body>\r\n</html>";
-            /* Вывод ответа в браузер */
+
             String response = "HTTP/1.1 200 OK\r\n" +
                     "Server: 123\r\n" +
                     "Content-Type: text/html; charset=utf-8\r\n" +
                     "Content-Length: " + str.length() + "\r\n" +
                     "Connection: close\r\n\r\n";
+
             String result = response + str;
+
             os.write(result.getBytes());
             os.flush();
         }
 
-        private void getRequest() throws Throwable {
+        private void readFile() throws Throwable {
 
             try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("LastUpdate.txt"), StandardCharsets.UTF_8))) {
-                String line_of_file;
+                String str;
                 System.out.println ("GET-запрос:");
-                while ((line_of_file = reader.readLine ()) != null) {
-                    System.out.println ("Строка из файла: " + line_of_file);
+                while ((str = reader.readLine ()) != null) {
+                    System.out.println ("Строка из файла: " + str);
                 }
             }
         }
 
-        private void updateRequest(String str) throws Throwable {
+        private void changeFile(String str) throws Throwable {
 
             try (FileWriter updater = new FileWriter ("LastUpdate.txt", false)) {
                 updater.write (str);
@@ -124,7 +123,7 @@ public class HttpServer {
                     if (readBytesCount == 1 || readBytesCount > 3 ) { /*Символ или строка(для корректной работы требуется не менее 4 байт информации)*/
                         System.out.println (new String (buffer).trim ());
                         if ( (new String (buffer).trim ().length ()) == 0 ) {
-                            writer.write (" "); /* Запись пробела*/
+                            writer.write (" "); /*Запись пробела*/
                         }
                         else {
                             writer.write (new String (buffer).trim ());
@@ -142,13 +141,12 @@ public class HttpServer {
                     else { once = false; }
 
                     if (readBytesCount == 3) { /*Стрелки*/
-                        System.out.println ("Error of read stream");
+                        System.out.println ("ERROR of read stream");
                         break;
                     }
                     writer.flush ();
                 }
             }
-
             /* Second checking method type (for TELNET)*/
             try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("File.txt"), StandardCharsets.UTF_8))) {
                 if (methodtype == null) {
@@ -158,71 +156,66 @@ public class HttpServer {
                     }
                 }
             }
-            catch (Exception ex ) {
-
-            }
             finally {
 
-            methodtype=methodtype.toUpperCase().trim ();
+                methodtype=methodtype.toUpperCase().trim ();
 
-            switch (methodtype) {
-                case "GET": { getRequest(); } break;
+                switch (methodtype) {
 
-                case "UPDATE": { updateRequest(dateFormat.format(date)); } break;
+                    case "GET": { readFile(); } break;
 
-                case "DELETE": { updateRequest(""); } break;
+                    case "UPDATE": { changeFile(dateFormat.format(date)); } break;
 
-                case "POST": {
+                    case "DELETE": { changeFile(""); } break;
 
-                    try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("File.txt"), StandardCharsets.UTF_8))) {
+                    case "POST": {
+                        try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("File.txt"), StandardCharsets.UTF_8))) {
 
-                        once = false;
-                        int h = 0;
-                        while (true) {
-                            String str = reader.readLine ();
-                            if (str != null) if (str.length () != 0){
-                                h++;
-                                lines[h] = str;
-                            }
-                            if (str == null || str.length () == 0 || once) {
-                                if (once) {
-                                    break;
+                            once = false;
+                            int h = 0;
+                            while (true) {
+                                String str = reader.readLine ().trim ();
+                                if (str != null) if (str.length () != 0){
+                                    h++;
+                                    lines[h] = str;
                                 }
-                                once = true;
+                                if (str == null || str.length () == 0 || once) {
+                                    if (once) {
+                                        break;
+                                    }
+                                    once = true;
+                                }
                             }
+                            writer = new FileWriter ("Requests.txt", true);
+                            /* Обработка заголовков запроса(перезапись в Requests.txt)*/
+                            String[] mainHeaders, mainHeadersValue;
+                            mainHeaders = new String[30];
+                            mainHeadersValue = new String[30];
+
+                            for (int i = 1, x, y; i <= h; i++) {
+
+                                writer.write (lines[i] + "\r\n");
+                                if (lines[i].indexOf (":") > 0) {
+                                    x = lines[i].indexOf (":");
+                                    y = lines[i].length ();
+                                    mainHeaders[i] = lines[i].substring (0, x);
+                                    mainHeadersValue[i] = lines[i].substring (x + 2, y);
+                                }
+                                parameters = lines[i].trim ();
+                                if (!parameters.contains ("=")) {
+                                    parameters = null;
+                                }
+                            }
+                            writer.append ("\r\n");
+                            writer.flush ();
                         }
-                        writer = new FileWriter ("Requests.txt", true);
-                        /* Обработка заголовков запроса(перезапись в Requests.txt)*/
-                        String[] mainHeaders, mainHeadersValue;
-                        mainHeaders = new String[30];
-                        mainHeadersValue = new String[30];
+                        methodtype += " <br>Параметры: " + parameters;
+                    } break;
 
-                        for (int i = 1, x, y; i <= h; i++) {
-
-                            writer.write (lines[i] + "\r\n");
-                            if (lines[i].indexOf (":") > 0) {
-                                x = lines[i].indexOf (":");
-                                y = lines[i].length ();
-                                mainHeaders[i] = lines[i].substring (0, x);
-                                mainHeadersValue[i] = lines[i].substring (x + 2, y);
-                            }
-
-                            parameters = lines[i].trim ();
-                            if (-1 == parameters.indexOf ("=")) {
-                                parameters = null;
-                            }
-
-                        }
-                        writer.append ("\r\n");
-                        writer.flush ();
-                    }
-                    methodtype += "(Параметры: " + parameters + " )";
+                    default: {
+                        methodtype = "Undefined type or incorrect request";
+                    } break;
                 }
-                break;
-                default: {
-                    methodtype = "Undefined type or incorrect request";
-                }
-            }
             }
             return methodtype;
         }
