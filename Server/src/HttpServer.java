@@ -78,141 +78,128 @@ public class HttpServer {
             os.flush();
         }
 
-        private void unusualRequest(String str) throws Throwable {
-            FileWriter writer = new FileWriter ("File.txt", true);
-            writer.write (str);
-            writer.write ("\r\n\r\n");
-            writer.flush ();
-            writer.close ();
+        private void getRequest() throws Throwable {
+
+            try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("LastUpdate.txt"), StandardCharsets.UTF_8))) {
+                String line_of_file;
+                System.out.println ("GET-запрос:");
+                while ((line_of_file = reader.readLine ()) != null) {
+                    System.out.println ("Строка из файла: " + line_of_file);
+                }
+            }
         }
 
-        private String readRequest() throws Throwable, IOException, FileNotFoundException {
+        private void updateRequest(String str) throws Throwable {
 
-            String parameters = null;
+            try (FileWriter updater = new FileWriter ("LastUpdate.txt", false)) {
+                updater.write (str);
+                updater.flush ();
+            }
+        }
+
+        private String readRequest() throws Throwable, IOException {
+
+            String parameters = null, methodtype = null;
             String[] lines = new String[120];
             DateFormat dateFormat = new SimpleDateFormat (" dd/MM/yy HH:mm");
             Date date = new Date();
-            String methodtype = "";
-            int h = 0;
-
             byte[] buffer = new byte[1024];
-            {
-                FileWriter writer = new FileWriter ("File.txt", false);
-                boolean once = false;
-                while (true){
-                    int readBytesCount = is.read(buffer);
 
-                    if (readBytesCount > 128) { /* Чтение потока отправленного через браузер*/
-                        methodtype = new String(buffer).trim().substring (0,8);
-                        methodtype = methodtype.substring (0,methodtype.indexOf(" "));
-                        if ("POST".equalsIgnoreCase(methodtype)) {
-                            writer.write (new String (buffer).trim ());
-                            writer.flush ();
-                        }
-                        else
-                        {
-                            unusualRequest(methodtype);
-                        }
-                        break;
-                    }
-                    else { /* Чтение потока отправленного через telnet (посимвольно) */
-                        if (readBytesCount == 1 || readBytesCount > 3 ) { /*Символ или строка(для корректной работы требуется не менее 4 байт информации)*/
-                            System.out.println (new String (buffer).trim ());
-                            if ( (new String (buffer).trim ().length ()) == 0 ) {
-                                writer.write (" ");
-                            }
-                            else {
-                                writer.write (new String (buffer).trim ());
-                            }
-                        }
+            FileWriter writer = new FileWriter ("File.txt", false);
+            boolean once = false;
+            while (true){
+                int readBytesCount = is.read(buffer);
 
-                        if (readBytesCount == 2) { /*Enter*/
-                            if (once) {
-                                break;
-                            }
-                            System.out.println ("Enter");
-                            writer.append("\r\n").write (new String (buffer).trim ());
-                            once = true;
-                        }
-                        else { once = false; }
+                if (readBytesCount > 128) { /* Чтение потока отправленного через браузер */
+                    methodtype = new String(buffer).trim().substring (0,8);
+                    methodtype = methodtype.substring (0,methodtype.indexOf(" "));
 
-                        if (readBytesCount == 3) { /*Стрелки*/
-                            System.out.println ("Error of read stream");
-                            break;
-                        }
+                    if ("POST".equalsIgnoreCase(methodtype)) {
+                        writer.write (new String (buffer).trim ());
                         writer.flush ();
                     }
+                    break;
+                }
+                else { /* Чтение потока отправленного через telnet (посимвольно) */
+                    if (readBytesCount == 1 || readBytesCount > 3 ) { /*Символ или строка(для корректной работы требуется не менее 4 байт информации)*/
+                        System.out.println (new String (buffer).trim ());
+                        if ( (new String (buffer).trim ().length ()) == 0 ) {
+                            writer.write (" "); /* Запись пробела*/
+                        }
+                        else {
+                            writer.write (new String (buffer).trim ());
+                        }
+                    }
+
+                    if (readBytesCount == 2) { /*Enter*/
+                        if (once) {
+                            break;
+                        }
+                        System.out.println ("Enter");
+                        writer.append("\r\n").write (new String (buffer).trim ());
+                        once = true;
+                    }
+                    else { once = false; }
+
+                    if (readBytesCount == 3) { /*Стрелки*/
+                        System.out.println ("Error of read stream");
+                        break;
+                    }
+                    writer.flush ();
                 }
             }
 
-            /* Second checking method type */
+            /* Second checking method type (for TELNET)*/
             try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("File.txt"), StandardCharsets.UTF_8))) {
-                methodtype = reader.readLine ().trim ();
-                if (methodtype.trim ().indexOf (" ") > 0) {
-                    methodtype = methodtype.substring (0, methodtype.indexOf (" "));
+                if (methodtype == null) {
+                    methodtype = reader.readLine().trim();
+                    if (methodtype.trim ().indexOf (" ") > 0) {
+                        methodtype = methodtype.substring (0, methodtype.indexOf (" "));
+                    }
                 }
             }
+            catch (Exception ex ) {
+
+            }
+            finally {
+
             methodtype=methodtype.toUpperCase().trim ();
 
             switch (methodtype) {
-                case "GET": {
-                    try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("LastUpdate.txt"), StandardCharsets.UTF_8))) {
-                        String line_of_file;
-                        System.out.println ("GET-запрос:");
-                        while ((line_of_file = reader.readLine ()) != null) {
-                            System.out.println ("Строка из файла: " + line_of_file);
-                        }
-                    }
-                }
-                break;
+                case "GET": { getRequest(); } break;
 
-                case "UPDATE": {
-                    try (FileWriter updater = new FileWriter ("LastUpdate.txt", false)) {
-                        updater.write (dateFormat.format(date));
-                        updater.flush ();
-                    }
-                }
+                case "UPDATE": { updateRequest(dateFormat.format(date)); } break;
 
-                break;
-
-                case "DELETE": {
-                    try (FileWriter updater = new FileWriter ("LastUpdate.txt", false)) {
-                        updater.write ("");
-                        updater.flush ();
-                    }
-                }
-                break;
+                case "DELETE": { updateRequest(""); } break;
 
                 case "POST": {
-                    unusualRequest("");
+
                     try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("File.txt"), StandardCharsets.UTF_8))) {
 
-                        boolean once = false;
+                        once = false;
+                        int h = 0;
                         while (true) {
                             String str = reader.readLine ();
-
-                            if (str.length () != 0) {
+                            if (str != null) if (str.length () != 0){
                                 h++;
                                 lines[h] = str;
                             }
-
-                            if (str.length () == 0 || once) {
+                            if (str == null || str.length () == 0 || once) {
                                 if (once) {
                                     break;
                                 }
                                 once = true;
                             }
                         }
-
-                        FileWriter writer = new FileWriter ("Requests.txt", true);
+                        writer = new FileWriter ("Requests.txt", true);
                         /* Обработка заголовков запроса(перезапись в Requests.txt)*/
                         String[] mainHeaders, mainHeadersValue;
                         mainHeaders = new String[30];
                         mainHeadersValue = new String[30];
-                        for (int i = 1, x, y; i <= h; i++) {
-                            writer.write (lines[i]);
-                            writer.append ("\r\n");
 
+                        for (int i = 1, x, y; i <= h; i++) {
+
+                            writer.write (lines[i] + "\r\n");
                             if (lines[i].indexOf (":") > 0) {
                                 x = lines[i].indexOf (":");
                                 y = lines[i].length ();
@@ -226,12 +213,8 @@ public class HttpServer {
                             }
 
                         }
-
                         writer.append ("\r\n");
                         writer.flush ();
-                        reader.close ();
-                        writer.close ();
-
                     }
                     methodtype += "(Параметры: " + parameters + " )";
                 }
@@ -240,7 +223,7 @@ public class HttpServer {
                     methodtype = "Undefined type or incorrect request";
                 }
             }
-
+            }
             return methodtype;
         }
     }
