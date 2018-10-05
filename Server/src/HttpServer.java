@@ -102,7 +102,8 @@ public class HttpServer {
             String[] lines = new String[120];
             DateFormat dateFormat = new SimpleDateFormat (" dd/MM/yy HH:mm");
             Date date = new Date();
-            byte[] buffer = new byte[1024];
+            int streamSize = 1024;
+            byte[] buffer = new byte[streamSize];
 
             FileWriter writer = new FileWriter ("File.txt", false);
             boolean once = false;
@@ -114,6 +115,11 @@ public class HttpServer {
                     methodtype = methodtype.substring (0,methodtype.indexOf(" "));
 
                     if ("POST".equalsIgnoreCase(methodtype)) {
+                        while (readBytesCount >= streamSize)
+                        {
+                            writer.write (new String (buffer).trim ());
+                            readBytesCount = is.read(buffer);
+                        }
                         writer.write (new String (buffer).trim ());
                         writer.flush ();
                     }
