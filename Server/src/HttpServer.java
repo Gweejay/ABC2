@@ -179,19 +179,22 @@ public class HttpServer {
 
                             once = false;
                             int h = 0;
-                            while (true) {
-                                String str = reader.readLine ().trim ();
-                                if (str != null) if (str.length () != 0){
-                                    h++;
-                                    lines[h] = str;
-                                }
-                                if (str == null || str.length () == 0 || once) {
-                                    if (once) {
-                                        break;
+                            try {
+                                while (true) {
+                                    String str = reader.readLine ().trim ();
+                                    if (str != null) if (str.length () != 0) {
+                                        h++;
+                                        lines[h] = str;
                                     }
-                                    once = true;
+                                    if (str == null || str.length () == 0 || once) {
+                                        if (once) {
+                                            break;
+                                        }
+                                        once = true;
+                                    }
                                 }
                             }
+                            catch (Exception ex) {}
                             writer = new FileWriter ("Requests.txt", true);
                             /* Обработка заголовков запроса(перезапись в Requests.txt)*/
                             String[] mainHeaders, mainHeadersValue;
@@ -202,8 +205,8 @@ public class HttpServer {
 
                                 writer.write (lines[i] + "\r\n");
                                 if (lines[i].indexOf (":") > 0) {
-                                    x = lines[i].indexOf (":");
-                                    y = lines[i].length ();
+                                    x =lines[i].indexOf (":");
+                                    y =lines[i].length ();
                                     mainHeaders[i] = lines[i].substring (0, x);
                                     mainHeadersValue[i] = lines[i].substring (x + 2, y);
                                 }

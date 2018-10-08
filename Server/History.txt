@@ -15,3 +15,18 @@ POST <br>Параметры: a=123454; x64) Ap 05/10/18 11:35
 GET 05/10/18 11:35
 POST <br>Параметры: a=12345 05/10/18 11:35
 GET 05/10/18 11:35
+POST <br>Параметры: a=123 08/10/18 13:21
+GET 08/10/18 13:21
+GET 08/10/18 13:36
+GET 08/10/18 13:36
+Undefined type or incorrect request 08/10/18 16:03
+Undefined type or incorrect request 08/10/18 16:04
+Undefined type or incorrect request 08/10/18 16:06
+Undefined type or incorrect request 08/10/18 16:06
+GET 08/10/18 16:08
+POST <br>Параметры: a=dfg 08/10/18 16:13
+GET 08/10/18 16:13
+Undefined type or incorrect request 08/10/18 16:16
+POST <br>Параметры: null 08/10/18 16:17
+POST <br>Параметры: a=dfg 08/10/18 16:18
+GET 08/10/18 16:18
