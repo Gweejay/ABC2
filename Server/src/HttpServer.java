@@ -2,15 +2,18 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 
-public class HttpServer {
+public abstract class HttpServer {
 
-    public static void main(String[] args) throws Throwable {
+    public static  void main(String[] args) throws Throwable {
         ServerSocket ss = new ServerSocket(8080);
         while (true) {
             System.out.println("1. Wait for clients");
@@ -77,28 +80,48 @@ public class HttpServer {
             os.flush();
         }
 
-        private void readFile() throws Throwable {
+        private void readFile(String res) throws Throwable {
 
-            try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("LastUpdate.txt"), StandardCharsets.UTF_8))) {
-                String str;
-                System.out.println ("GET-запрос:");
-                while ((str = reader.readLine ()) != null) {
-                    System.out.println ("Строка из файла: " + str);
+            if (!(("favicon.ico".equalsIgnoreCase(res)) || ("".equalsIgnoreCase(res)))) {
+                try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream (res), StandardCharsets.UTF_8))) {
+                    String str;
+                    System.out.println ("GET-запрос: чтение " + res);
+                    while ((str = reader.readLine ()) != null) {
+                        System.out.println ("Строка из файла: " + str);
+                    }
+
+                } catch (FileNotFoundException e) {
+                    System.out.println ("Error !!!!!!!!!");
                 }
+            }
+            else { /* do nothing */}
+        }
+
+        private void update (String res) throws Throwable {
+
+            try (FileWriter updater = new FileWriter ("LastUpdate.txt", false)) {
+                updater.write (res);
+                updater.flush ();
             }
         }
 
-        private void changeFile(String str) throws Throwable {
+        private void delete (String res) throws IOException {
 
-            try (FileWriter updater = new FileWriter ("LastUpdate.txt", false)) {
-                updater.write (str);
-                updater.flush ();
+            File file = new File("C:\\Users\\nadirov-aa\\Downloads\\WebApp\\Server\\" + res);
+            System.out.println (file.delete());
+
+            if(file.delete()) {
+                System.out.println("Файл успешно удален");
+            }
+            else {
+                System.err.println("Ошибка при удалении файла");
             }
         }
 
         private String readRequest() throws Throwable, IOException {
 
-            String parameters = null, methodtype = null;
+            String parameters = null, methodtype = null, resourse = null, http = null, firstline = null;
+
             String[] lines = new String[120];
             DateFormat dateFormat = new SimpleDateFormat (" dd/MM/yy HH:mm");
             Date date = new Date();
@@ -110,11 +133,38 @@ public class HttpServer {
             while (true){
                 int readBytesCount = is.read(buffer);
 
-                if (readBytesCount > 128) { /* Чтение потока отправленного через браузер */
-                    methodtype = new String(buffer).trim().substring (0,8);
-                    methodtype = methodtype.substring (0,methodtype.indexOf(" "));
+                if (readBytesCount > 128) {
+                    /* Чтение потока отправленного через браузер */
+                    {
+                        int x = 0, y = 0;
+                        String str;
+                        firstline = new String (buffer).trim ().substring (0,40);
+                        firstline = firstline.substring (0, firstline.indexOf ("\r\n"));
 
-                    if ("POST".equalsIgnoreCase(methodtype)) {
+                        while (x >= 0) {
+                            y++;
+                            x=firstline.indexOf (" ");
+                            if (x > 0) {
+                                str = firstline.substring (0, x);
+                                firstline = firstline.substring (x + 1, firstline.length ());
+                            }
+                            else str = firstline;
+                            switch (y) {
+                                case 1 : methodtype = str;
+                                    break;
+                                case 2 : resourse = str.substring (1, str.length ());
+                                    break;
+                                case 3 : http = str;
+                                    break;
+                                default: { /*do nothing*/ }
+                            }
+                        }
+
+                    }
+
+                    if (true)
+//                    if ("POST".equalsIgnoreCase(methodtype))
+                    {
                         while (readBytesCount >= streamSize)
                         {
                             writer.write (new String (buffer).trim ());
@@ -164,15 +214,13 @@ public class HttpServer {
             }
             finally {
 
-                methodtype=methodtype.toUpperCase().trim ();
-
                 switch (methodtype) {
 
-                    case "GET": { readFile(); } break;
+                    case "GET": { readFile(resourse); } break;
 
-                    case "UPDATE": { changeFile(dateFormat.format(date)); } break;
+                    case "UPDATE": { update(dateFormat.format(date)); } break;
 
-                    case "DELETE": { changeFile(""); } break;
+                    case "DELETE": { delete(resourse); } break;
 
                     case "POST": {
                         try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("File.txt"), StandardCharsets.UTF_8))) {
