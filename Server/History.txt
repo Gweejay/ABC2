@@ -1,32 +1,58 @@
 
-POST <br>Параметры: a=908 01/10/18 15:50
-GET 01/10/18 15:50
-POST <br>Параметры: a=756 05/10/18 11:09
-GET 05/10/18 11:09
-POST <br>Параметры: a=987 05/10/18 11:26
-GET 05/10/18 11:26
-POST <br>Параметры: a=987n64; x64) Ap 05/10/18 11:31
-GET 05/10/18 11:31
-POST <br>Параметры: a=987n64; x64) Ap 05/10/18 11:33
-GET 05/10/18 11:33
-POST <br>Параметры: a=123454; x64) Ap 05/10/18 11:35
-GET 05/10/18 11:35
-POST <br>Параметры: a=123454; x64) Ap 05/10/18 11:35
-GET 05/10/18 11:35
-POST <br>Параметры: a=12345 05/10/18 11:35
-GET 05/10/18 11:35
-POST <br>Параметры: a=123 08/10/18 13:21
-GET 08/10/18 13:21
-GET 08/10/18 13:36
-GET 08/10/18 13:36
-Undefined type or incorrect request 08/10/18 16:03
-Undefined type or incorrect request 08/10/18 16:04
-Undefined type or incorrect request 08/10/18 16:06
-Undefined type or incorrect request 08/10/18 16:06
-GET 08/10/18 16:08
-POST <br>Параметры: a=dfg 08/10/18 16:13
-GET 08/10/18 16:13
-Undefined type or incorrect request 08/10/18 16:16
-POST <br>Параметры: null 08/10/18 16:17
-POST <br>Параметры: a=dfg 08/10/18 16:18
-GET 08/10/18 16:18
+GET http://localhost:8080/File.txt 10/10/18 15:35
+GET http://localhost:8080/ 10/10/18 16:45
+GET http://localhost:8080/File.txt 10/10/18 16:45
+GET http://localhost:8080/File2.txt 10/10/18 16:46
+GET http://localhost:8080/File2.txt 10/10/18 16:52
+GET http://localhost:8080/File2.txt 10/10/18 16:54
+GET http://localhost:8080/File2.txt 10/10/18 16:55
+GET http://localhost:8080/File2.txt 10/10/18 16:55
+GET http://localhost:8080/File2.txt 10/10/18 16:55
+GET http://localhost:8080/File2.txt 10/10/18 16:55
+GET http://localhost:8080/File2.txt 10/10/18 16:55
+GET http://localhost:8080/File2.txt 10/10/18 16:55
+GET http://localhost:8080/File2.txt 10/10/18 16:55
+GET http://localhost:8080/File2.txt 10/10/18 16:55
+GET http://localhost:8080/File2.txt 10/10/18 16:55
+GET http://localhost:8080/File2.txt 10/10/18 16:57
+GET http://localhost:8080/File2.txt 10/10/18 16:58
+GET http://localhost:8080/File2.txt 10/10/18 16:59
+GET http://localhost:8080/File2.txt 10/10/18 16:59
+GET http://localhost:8080/File2.txt 10/10/18 16:59
+GET http://localhost:8080/File2.txt 10/10/18 17:00
+GET http://localhost:8080/File2.txt 10/10/18 17:00
+GET http://localhost:8080/File2.txt 10/10/18 17:00
+GET http://localhost:8080/File2.txt 10/10/18 17:00
+GET http://localhost:8080/File2.txt 10/10/18 17:00
+GET http://localhost:8080/File2.txt 10/10/18 17:01
+GET http://localhost:8080/File3.txt 10/10/18 17:01
+GET http://localhost:8080/File1.txt 10/10/18 17:01
+GET http://localhost:8080/File2.txt 10/10/18 17:01
+GET http://localhost:8080/File2.txt 10/10/18 17:05
+GET http://localhost:8080/File2.txt 10/10/18 17:05
+GET http://localhost:8080/File2.txt 10/10/18 17:05
+GET http://localhost:8080/File2.txt 10/10/18 17:07
+null http://localhost:8080/null 10/10/18 17:15
+Undefined http://localhost:8080/sf 10/10/18 17:15
+Undefined http://localhost:8080/er 10/10/18 17:16
+Undefined http://localhost:8080/null 10/10/18 17:18
+Undefined http://localhost:8080/teret 10/10/18 17:18
+Undefined http://localhost:8080/wetr 10/10/18 17:21
+GET http://localhost:8080/File3.txt 10/10/18 17:28
+GET http://localhost:8080/DEL5.txt 10/10/18 17:30
+GET http://localhost:8080/DEL5.txt 10/10/18 17:33
+GET http://localhost:8080/DEL5.txt 10/10/18 17:33
+GET http://localhost:8080/DEL.txt 10/10/18 17:33
+GET http://localhost:8080/DE2344L.txt 10/10/18 17:34
+POST http://localhost:8080/ 10/10/18 17:38
+POST http://localhost:8080/ 10/10/18 17:45
+POST http://localhost:8080/ 10/10/18 17:54
+GET http://localhost:8080/favicon.ico 10/10/18 17:54
+POST http://localhost:8080/ 10/10/18 17:56
+GET http://localhost:8080/favicon.ico 10/10/18 17:56
+POST http://localhost:8080/ 10/10/18 17:57
+POST http://localhost:8080/ 10/10/18 17:59
+POST http://localhost:8080/ 10/10/18 17:59
+POST http://localhost:8080/ 10/10/18 18:00
+POST http://localhost:8080/ 10/10/18 18:01
+POST http://localhost:8080/ 10/10/18 18:02

@@ -1,12 +1,12 @@
-GET /favicon.ico HTTP/1.1
+POST / HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+Accept-Language: ru-RU
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
 Host: localhost:8080
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
-Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://localhost:8080/
-Accept-Encoding: gzip, deflate, br
-Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
-Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236eEncoding: gzip, deflate, br
-Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Content-Length: 76
+Connection: Keep-Alive
+Cache-Control: no-cache
 
-a=3123
+a=0980&b=C%3A%5CUsers%5Cnadirov-aa%5CDownloads%5CWebApp%5CServer%5CFile3.txt

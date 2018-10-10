@@ -12,3 +12,918 @@ Accept-Encoding: gzip, deflate, br
 Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
 a=3123
 
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=123
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=123
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 7
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=12344
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 7
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=12344
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 7
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=12344;q=0.7
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 7
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=12345
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 7
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=12345
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 4
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=46
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=325
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=325
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=325
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=879
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=879
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=879
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=879
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=879
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=879
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=879
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+
+
+
+
+
+
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+
+
+
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 6
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=7808
+
+
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 8
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=tyu%5C
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 8
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=tyu%5C
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 8
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=tyu%5C
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=789
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=987
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=987
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=987
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=987
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=987
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 5
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Origin: http://localhost:8080
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: Idea-c59eb32d=766c0f77-1749-4c93-9fff-f9bb7e14236e
+a=987
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 18
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=9999&b=File2.txt
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 22
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=66666666&a=File2.txt
+
+POST / HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+Accept-Language: ru-RU
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: localhost:8080
+Content-Length: 72
+Connection: Keep-Alive
+Cache-Control: no-cache
+a=&b=C%3A%5CUsers%5Cnadirov-aa%5CDownloads%5CWebApp%5CServer%5CFile3.txt
+
+POST / HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+Accept-Language: ru-RU
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: localhost:8080
+Content-Length: 72
+Connection: Keep-Alive
+Cache-Control: no-cache
+a=&b=C%3A%5CUsers%5Cnadirov-aa%5CDownloads%5CWebApp%5CServer%5CFile3.txt
+
+POST / HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+Accept-Language: ru-RU
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: localhost:8080
+Content-Length: 72
+Connection: Keep-Alive
+Cache-Control: no-cache
+a=&b=C%3A%5CUsers%5Cnadirov-aa%5CDownloads%5CWebApp%5CServer%5CFile3.txt
+
+POST / HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+Accept-Language: ru-RU
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: localhost:8080
+Content-Length: 72
+Connection: Keep-Alive
+Cache-Control: no-cache
+a=&b=C%3A%5CUsers%5Cnadirov-aa%5CDownloads%5CWebApp%5CServer%5CFile3.txt
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 44
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=fdgsfg%5C%5C%5C%5Cdsg%2F%2Fffd%2Fff%2Fffds
+
+POST / HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+Accept-Language: ru-RU
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: localhost:8080
+Content-Length: 76
+Connection: Keep-Alive
+Cache-Control: no-cache
+a=0980&b=C%3A%5CUsers%5Cnadirov-aa%5CDownloads%5CWebApp%5CServer%5CFile2.txt
+
+POST / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 14
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: null
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+a=&a=File3.txt
+
+POST / HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+Accept-Language: ru-RU
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: localhost:8080
+Content-Length: 76
+Connection: Keep-Alive
+Cache-Control: no-cache
+a=0980&b=C%3A%5CUsers%5Cnadirov-aa%5CDownloads%5CWebApp%5CServer%5CFile3.txt
+
