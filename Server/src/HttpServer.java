@@ -69,19 +69,19 @@ public class HttpServer {
                     /*do nothing*/
                 }
             }
-            System.out.println("4. Client processing finished");
+            System.out.println("4. Client processing finished (" + methodtype + ")");
         }
 
         private void writeResponse(String str) throws Throwable {
             /* История запросов */
-            try (FileWriter writer = new FileWriter ("History.txt", true)) {
+            try (FileWriter writer = new FileWriter ("General/History.txt", true)) {
                 DateFormat dateFormat = new SimpleDateFormat (" dd/MM/yy HH:mm");
                 Date date = new Date();
                 writer.append ("\r\n").write (methodtype + " http://localhost:8080/" + resourse + dateFormat.format(date));
                 writer.flush ();
             }
 
-            str = "<html>\r\n<body>\r\n<b>\r\n" + str + "\r\n</b>\r\n</body>\r\n</html>";
+            str = "<!DOCTYPE HTML><html><head><meta charset=\"utf-8\"></head>\r\n<body>\r\n<div>\r\n" + str + "\r\n</div>\r\n</body>\r\n</html>";
 
             String response;
             response = http + " " + code + " " + message + "\r\n" +
@@ -99,9 +99,9 @@ public class HttpServer {
             os.flush();
         }
 
-        private void get (String res) throws Throwable {
-            if (!("".equalsIgnoreCase(res))) {
-                try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream (res), StandardCharsets.UTF_8))) {
+        private void get () throws Throwable {
+            if (!("".equalsIgnoreCase(resourse))) {
+                try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream (resourse), StandardCharsets.UTF_8))) {
                     String str;
                     while ((str = reader.readLine ()) != null) {
                         response += str + "<br>";
@@ -116,7 +116,7 @@ public class HttpServer {
         }
 
         private void update (String res) throws Throwable {
-            try (FileWriter updater = new FileWriter ("LastUpdate.txt", false)) {
+            try (FileWriter updater = new FileWriter ("Folder/LastUpdate.txt", false)) {
                 updater.write (res);
                 updater.flush ();
                 transfer (202, "Accepted", "Success update");
@@ -126,20 +126,53 @@ public class HttpServer {
             }
         }
 
-        private void delete (String res)  {
-            File file = new File ("C:\\Users\\nadirov-aa\\Downloads\\WebApp\\Server\\" + res);
-            if (file.delete ()) {
-                transfer (202, "Accepted", "Файл успешно удален");
+        private void delete ()  {
+            if (resourse != "") {
+                File file = new File (resourse);
+                if (file.delete ()) {
+                    transfer (202, "Accepted", "Файл успешно удален");
+                } else {
+                    transfer (404, "Not Found", "Not Found");
+                }
             } else {
-                transfer (404, "Not Found", "Not Found");
+                transfer (400, "Bad Request", "Bad Request");
             }
+        }
+
+        private int newID (int id) {
+
+            try (BufferedReader uploader = new BufferedReader (new InputStreamReader (new FileInputStream ("General/Base.txt"), StandardCharsets.UTF_8))) {
+                String str = uploader.readLine ();
+                id += Integer.parseInt (str);
+                uploader.close ();
+            } catch (IOException e) { }
+
+            try (FileWriter uploader = new FileWriter ("General/Base.txt", false)) {
+                uploader.append (id + "");
+                uploader.flush ();
+                uploader.close ();
+            } catch (IOException e) { }
+            return id;
+        }
+
+        private String format (String s) {
+            String index = "; filename=\"";
+            int x = s.indexOf (index);
+            int y = index.length ();
+
+            s = s.substring (x + y, s.length());
+            s = s.substring (0, s.indexOf ("\""));
+            s = s.substring (s.indexOf ("."), s.length ());
+
+            return s;
         }
 
         private Boolean access() throws Throwable {
             boolean b = true;
             try {
-                BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("SystemFiles.txt"), StandardCharsets.UTF_8));
+                BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("General/List.txt"), StandardCharsets.UTF_8));
                 {
+                    System.out.println (resourse);
                     String str;
                     while ((str = reader.readLine ()) != null) {
                         if (str.equalsIgnoreCase (resourse)) {
@@ -149,7 +182,9 @@ public class HttpServer {
                     }
                     reader.close ();
                 }
-            } catch(FileNotFoundException e) { }
+            } catch(FileNotFoundException e) {
+                transfer (500, "Internal Server Error", "Internal Server Error");
+            }
 
             return b;
         }
@@ -189,13 +224,15 @@ public class HttpServer {
 
         private String readRequest() throws Throwable {
 
+            String Operator = "";
+
             String[] lines = new String[120];
             DateFormat dateFormat = new SimpleDateFormat (" dd/MM/yy HH:mm");
             Date date = new Date();
 
-            int streamSize = 1024;
+            int streamSize = 8192;
             byte[] buffer = new byte[streamSize];
-            FileWriter writer = new FileWriter ("File.txt", false);
+            FileWriter writer = new FileWriter ("General/Operator.txt", false);
             boolean once = false;
 
             while (true){
@@ -208,13 +245,24 @@ public class HttpServer {
 
                     if (true)
                     {
-                        while (readBytesCount >= streamSize)
+                        while (readBytesCount == streamSize)
                         {
-                            writer.write (new String (buffer).trim ());
-                            readBytesCount = is.read(buffer);
+                            Operator = Operator + (new String (buffer).trim ());
+                            if ("POST".equalsIgnoreCase (methodtype)) {
+                                writer.write (new String (buffer).trim ());
+                            }
+                            readBytesCount = is.read (buffer);
                         }
-                        writer.write (new String (buffer).trim ());
+                        Operator = Operator + (new String (buffer).trim ());
+                        if (methodtype.equalsIgnoreCase ("POST")) {
+                            writer.write (new String (buffer).trim ());
+                            System.out.println ("Записал поток на txt");
+                        }
+                        else {
+                            System.out.println (methodtype + " информация не записана");
+                        }
                         writer.flush ();
+
                     }
                     break;
                 }
@@ -248,7 +296,7 @@ public class HttpServer {
             writer.close ();
             /* Second checking method type (for TELNET)*/
             if (code == 500) {
-                try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("File.txt"), StandardCharsets.UTF_8))) {
+                try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("General/Operator.txt"), StandardCharsets.UTF_8))) {
                     if (methodtype == null) {
                         String FL = reader.readLine ().trim ();
                         if (true) {
@@ -260,7 +308,7 @@ public class HttpServer {
                     switch (methodtype) {
 
                         case "GET": {
-                            if (access ()) get (resourse);
+                            if (access ()) get ();
                         }
                         break;
 
@@ -270,60 +318,55 @@ public class HttpServer {
                         break;
 
                         case "DELETE": {
-                            if (access ()) delete (resourse);
+                            if (access ()) delete ();
                         }
                         break;
 
                         case "POST": {
-                            try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("File.txt"), StandardCharsets.UTF_8))) {
 
-                                once = false;
-                                int h = 0;
-                                try {
-                                    while (true) {
-                                        String str = reader.readLine ().trim ();
-                                        if (str != null) if (str.length () != 0) {
-                                            h++;
-                                            lines[h] = str;
-                                        }
-                                        if (str == null || str.length () == 0 || once) {
-                                            if (once) {
-                                                break;
-                                            }
-                                            once = true;
-                                        }
-                                    }
-                                } catch (Exception ex) {
-                                }
-                                writer = new FileWriter ("Requests.txt", true);
-                                /* Обработка заголовков запроса(перезапись в Requests.txt)*/
-                                String[] mainHeaders, mainHeadersValue;
-                                mainHeaders = new String[30];
-                                mainHeadersValue = new String[30];
+                            Operator = Operator.substring ((Operator.indexOf ("\r\n\r\n")+4), Operator.length ());
 
-                                for (int i = 1, x, y; i <= h; i++) {
+                            String address = "id" + newID(1) + format(Operator);
 
-                                    writer.write (lines[i] + "\r\n");
-                                    if (lines[i].indexOf (":") > 0) {
-                                        x = lines[i].indexOf (":");
-                                        y = lines[i].length ();
-                                        mainHeaders[i] = lines[i].substring (0, x);
-                                        mainHeadersValue[i] = lines[i].substring (x + 2, y);
-                                    }
-                                    parameters = lines[i].trim ();
-                                    if (!parameters.contains ("=")) {
-                                        parameters = null;
-                                    }
-                                }
-                                writer.append ("\r\n");
-                                writer.flush ();
-                                if (parameters != null) {
-                                    transfer (201, "Created", "Successfully created: " + parameters);
-                                } else {
-                                    transfer (500, "Internal Server Error", "Error of transfer data : " + parameters);
-                                }
-                            }
+                            Operator = Operator.substring ((Operator.indexOf ("\r\n\r\n")+4), Operator.length ());
 
+                            Operator = Operator.substring (0,(Operator.indexOf ("------WebKitForm")));
+
+                            writer = new FileWriter ( address, false);
+
+
+
+                            /* Ввод данных*/
+                            writer.write(Operator);
+                            /* Вывод данных*/
+                            transfer (201, "Created", "<p>Successfully created: your file is on "
+                                    + "<a href =\""
+                                    + "http://localhost:8080/"
+                                    + address
+                                    + "\">Ссылка</a></p>"
+
+                            );
+
+/**
+ *Отбор основных заголовов запроса
+ *Должен применяться для всех методов
+ *
+ * */
+//                            String[] mainHeaders, mainHeadersValue;
+//                            mainHeaders = new String[30];
+//                            mainHeadersValue = new String[30];
+//
+//                            for (int i = 1, x, y; i <= h; i++) {
+//                                if (lines[i].indexOf (":") > 0) {
+//                                    x = lines[i].indexOf (":");
+//                                    y = lines[i].length ();
+//                                    mainHeaders[i] = lines[i].substring (0, x);
+//                                    mainHeadersValue[i] = lines[i].substring (x + 2, y);
+//                                }
+//                            }
+                            writer.append ("\r\n");
+                            writer.flush ();
+                            writer.close();
                         }
                         break;
 
