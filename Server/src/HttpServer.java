@@ -35,6 +35,7 @@ public class HttpServer {
         private String message = "Internal Server Error";
         private String response = "";
         private String Allow = "GET, POST, UPDATE, DELETE";
+        private String address = "";
 
         private void transfer (int code, String message) {
             this.transfer (code,message,"");
@@ -118,9 +119,9 @@ public class HttpServer {
             else {transfer (200, "OK", "Hello");}
         }
 
-        private void update (String res) throws Throwable {
-            try (FileWriter updater = new FileWriter ("Folder/LastUpdate.txt", false)) {
-                updater.write (res);
+        private void update (String data) throws Throwable {
+            try (FileWriter updater = new FileWriter (resourse, false)) {
+                updater.write (data);
                 updater.flush ();
                 transfer (202, "Accepted", "Success update");
             }
@@ -158,17 +159,27 @@ public class HttpServer {
         }
 
         private String format (String s) {
+            s=  s.substring ((s.indexOf ("\r\n\r\n")+4), s.length ());
+
+            if (s.indexOf ("------WebKitForm")>=0) {
+                s = s.substring ((s.indexOf ("\r\n\r\n") + 4), s.length ());
+                s = s.substring (0, (s.indexOf ("------WebKitForm")));
+            }
+
             String index = "; filename=\"";
-            int x = s.indexOf (index);
+            String txt = s;
+            int x = txt.indexOf (index);
             int y = index.length ();
 
             if (x>0) {
-                s = s.substring (x + y, s.length ());
-                s = s.substring (0, s.indexOf ("\""));
-                s = s.substring (s.indexOf ("."), s.length ());
+                txt = txt.substring (x + y, txt.length ());
+                txt = txt.substring (0, txt.indexOf ("\""));
+                txt = txt.substring (txt.indexOf ("."), txt.length ());
             } else {
-                s=".txt";
+                txt=".txt";
             }
+
+            address = "id" + newID(1) + txt;
 
             return s;
         }
@@ -238,7 +249,7 @@ public class HttpServer {
                 int readBytesCount = is.read(buffer);
 
                 if (readBytesCount > 128) {
-                    /* Чтение потока отправленного через браузер */
+                    /* Чтение потока более 128 байт */
                     String FL = new String (buffer).substring (0, new String (buffer).indexOf ("\r\n"));
                     checkFL (FL);
                     while (readBytesCount == streamSize)
@@ -276,35 +287,33 @@ public class HttpServer {
                     }
                 }
             }
+
+            Operator=format(Operator);
+
             switch (methodtype) {
                 case "GET": {
                     if (access ()) get ();
                 } break;
 
-                case "UPDATE": {
-                    update (" ");
+                case "POST": {
+                    update (Operator);
                 } break;
 
                 case "DELETE": {
                     if (access ()) delete ();
                 } break;
 
-                case "POST": {
-                    Operator = Operator.substring ((Operator.indexOf ("\r\n\r\n")+4), Operator.length ());
-                    String address = "id" + newID(1) + format(Operator);
-                    if (Operator.indexOf ("------WebKitForm")>=0) {
-                        Operator = Operator.substring ((Operator.indexOf ("\r\n\r\n") + 4), Operator.length ());
-                        Operator = Operator.substring (0, (Operator.indexOf ("------WebKitForm")));
-                    }
-                    FileWriter writer = new FileWriter ( address, false);
-                    writer.write(Operator);
-                    transfer (201, "Created", "<p>Successfully created: your file is on "
-                            + "<a href =\""
-                            + "http://localhost:8080/" + address
-                            + "\">Ссылка</a></p>");
-                    writer.flush ();
-                    writer.close();
-                } break;
+//                case "POST": {
+//
+//                    FileWriter writer = new FileWriter ( address, false);
+//                    writer.write(Operator);
+//                    transfer (201, "Created", "<p>Successfully created: your file is on "
+//                            + "<a href =\""
+//                            + "http://localhost:8080/" + address
+//                            + "\">Ссылка</a></p>");
+//                    writer.flush ();
+//                    writer.close();
+//                } break;
 
                 default: {
 
