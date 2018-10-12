@@ -37,10 +37,14 @@ public class HttpServer {
         private String address = "";
 
         private void transfer (int code, String message) {
-            this.transfer (code,message,"");
+            this.transfer (code,message,"", "");
         }
 
         private void transfer (int code, String message,String response) {
+            this.transfer (code,message,response, "");
+        }
+
+        private void transfer (int code, String message,String response, String allow) {
             if (code != 0 && message != "") {
                 this.code = code;
                 this.message = message;
@@ -48,13 +52,9 @@ public class HttpServer {
             if (response != "") {
                 this.response = response;
             }
-        }
-
-        private void transfer (int code, String message,String response, String allow) {
             if (allow != "") {
                 this.Allow = allow;
             }
-            this.transfer (code,message,response);
         }
 
         private SocketProcessor(Socket s) throws Throwable {
@@ -114,7 +114,7 @@ public class HttpServer {
                     transfer (200, "OK");
                     reader.close();
                 } catch (FileNotFoundException e) {
-                    transfer (404, "Not Found", "Not Found");
+                    transfer (404, "Not Found", "Not Found " + resource);
                 }
             } else {
                 transfer (200, "OK", "Hello", "GET, POST");
@@ -125,10 +125,10 @@ public class HttpServer {
             System.out.println ("Запрос на удаление: " + resource);
             if (resource.substring (0,2).equalsIgnoreCase ("id")) {
                 File file = new File (resource);
-                if (file.delete ()) {
+                if (file.delete()) {
                     transfer (202, "Accepted", "Файл успешно удален");
                 } else {
-                    transfer (404, "Not Found", "Not Found");
+                    transfer (404, "Not Found", "Not Found " + resource);
                 }
             } else {
                 transfer (403, "Forbidden", "Error: Аccess denied");
@@ -137,28 +137,41 @@ public class HttpServer {
 
         private void update (String data) throws Throwable {
             System.out.println ("Запрос на обновление: " + resource);
-            if (!("".equalsIgnoreCase(resource))) {
-                try (FileWriter updater = new FileWriter (resource, false)) {
+            File file = new File (resource);
+            if (file.exists ()) {
+                if (!("".equalsIgnoreCase (resource))) {
+                    FileWriter updater = new FileWriter (resource, false);
                     updater.write (data);
                     updater.flush ();
+                    updater.close ();
                     transfer (202, "Accepted", "Success update");
-                } catch (FileNotFoundException e) {
-                    transfer (404, "Not Found", "Not Found");
+                } else {
+                    transfer (405, "Method Not Allowed", "Method Not Allowed", "GET, POST");
                 }
-            } else {transfer (405, "Method Not Allowed", "Method Not Allowed", "GET, POST");}
+            } else {
+                transfer (404, "Not Found", "Not Found " + resource);
+            }
+            if (methodtype.equalsIgnoreCase ("POST")) {
+                response += "<p>Successfully updated: your file is on "
+                        + "<a href =\""
+                        + "http://localhost:8080/" + resource
+                        + "\">Ссылка</a></p>";
+            }
         }
 
-        private void post (String operator) throws Throwable {
+        private void post (String data) throws Throwable {
             System.out.println ("Сохранение файла: " + address);
             FileWriter writer = new FileWriter ( address, false);
-            writer.write(operator);
+            writer.write(data);
+            writer.flush ();
+            writer.close();
             transfer (201, "Created", "<p>Successfully created: your file is on "
                     + "<a href =\""
                     + "http://localhost:8080/" + address
                     + "\">Ссылка</a></p>");
-            writer.flush ();
-            writer.close();
         }
+
+
 
         private Boolean access() throws Throwable {
             boolean b = true;
@@ -184,25 +197,30 @@ public class HttpServer {
         }
 
         private String format (String s) {
+            if (s.indexOf ("\r\n\r\n") > 0) {
+                s = s.substring (s.indexOf("\r\n\r\n") + 4, s.length ());
+                String index = "; filename=\"";
+                String txt = s;
+                int x = txt.indexOf (index), y = index.length ();
 
-            s = s.substring ((s.indexOf ("\r\n\r\n")+4), s.length ());
-            String index = "; filename=\"";
-            String txt = s;
-            int x = txt.indexOf (index), y = index.length ();
+                if (x > 0) {
+                    txt = txt.substring (x + y, txt.length ());
+                    txt = txt.substring (0, txt.indexOf ("\""));
+                    txt = txt.substring (txt.indexOf ("."), txt.length ());
+                } else {
+                    txt = ".txt";
+                }
+                if (methodtype.equalsIgnoreCase ("POST") && "".equalsIgnoreCase (resource)) {
+                    address = "id" + newID (1) + txt;
+                }
+                if (s.contains ("------WebKitForm")) {
+                    s = s.substring (s.indexOf ("\r\n\r\n") + 4, s.lastIndexOf ("------WebKitForm"));
 
-            if (x>0) {
-                txt = txt.substring (x + y, txt.length ());
-                txt = txt.substring (0, txt.indexOf ("\""));
-                txt = txt.substring (txt.indexOf ("."), txt.length ());
-            } else {
-                txt=".txt";
+                }
+            } else if (methodtype.equalsIgnoreCase ("UPDATE") || methodtype.equalsIgnoreCase ("POST")) {
+                transfer (400, "Bad Request", "No data for " + methodtype);
             }
-            if (methodtype.equalsIgnoreCase ("POST")) {
-                address = "id" + newID (1) + txt;
-            }
-            if (s.contains ("------WebKitForm")) {
-                s = s.substring ((s.indexOf ("\r\n\r\n") + 4), s.lastIndexOf ("------WebKitForm"));
-            }
+
             return s;
         }
 
@@ -213,7 +231,7 @@ public class HttpServer {
                 uploader.close ();
             } catch (IOException e) { }
             try (FileWriter uploader = new FileWriter ("General/Base.txt", false)) {
-                uploader.append (id + "");
+                uploader.write (id + "");
                 uploader.flush ();
                 uploader.close ();
             } catch (IOException e) { }
@@ -306,8 +324,11 @@ public class HttpServer {
                     }
                 }
             }
-            operator=format(operator);
+
             if (code == 100) {
+
+                operator=format(operator);
+
                 switch (methodtype) {
                     case "GET": {
                         if (access ()) get ();
@@ -325,11 +346,11 @@ public class HttpServer {
                     break;
 
                     case "POST": {
-//                        if (!"".equalsIgnoreCase (resource))
-//                        {
-//                            if (access ()) update (operator);
-//                        }
-//                        else
+                        if (!"".equalsIgnoreCase (resource))
+                        {
+                            if (access ()) update (operator);
+                        }
+                        else
                         post (operator);
                     }
                     break;
