@@ -1,7 +1,3 @@
-------WebKitFormBoundary12k6PONjAY2Scgk1
-Content-Disposition: form-data; name="a"; filename="DefaultFile.txt"
-Content-Type: text/plain
-
 300 Multiple Choices - Сервер передаёт с сообщением список альтернатив, давая возможность сделать выбор клиенту автоматически или пользователю.
 301 Moved Permanently - Запрошенный док-т окончательно перенесен
 302 Moved Temporarily - Запрошенный док-т перенесен временно
@@ -12,4 +8,3 @@ Content-Type: text/plain
 306 Зарезервирован
 307 - 301, сохраняющий метод запроса. Был пост остается пост
 308 - 302, сохраняющий метод запроса. Был пост остается пост
-------WebKitFormBoundary12k6PONjAY2Scgk1--

@@ -30,10 +30,9 @@ public class HttpServer {
 
         private String http = "HTTP/1.1";
         private String methodtype = null;
-        private String resourse = null;
-        private int code = 500;
-        private String message = "Internal Server Error";
-        private String response = "";
+        private String resource = null;
+        private int code = 100;
+        private String message = "Continue", response = "Continue";
         private String Allow = "GET, POST, UPDATE, DELETE";
         private String address = "";
 
@@ -66,8 +65,8 @@ public class HttpServer {
 
         public void run() {
             try {
-                System.out.println (readRequest());
-                writeResponse(this.response);
+                readRequest();
+                writeResponse(response);
             } catch (Throwable t) {
                 /*do nothing*/
             } finally {
@@ -77,7 +76,7 @@ public class HttpServer {
                     /*do nothing*/
                 }
             }
-            System.out.println("4. Client processing finished (" + methodtype + ")");
+            System.out.println("3. Client processing finished (" + methodtype + ")");
         }
 
         private void writeResponse(String str) throws Throwable {
@@ -85,7 +84,7 @@ public class HttpServer {
             try (FileWriter writer = new FileWriter ("General/History.txt", true)) {
                 DateFormat dateFormat = new SimpleDateFormat (" dd/MM/yy HH:mm");
                 Date date = new Date();
-                writer.append ("\r\n").write (methodtype + " http://localhost:8080/" + resourse + dateFormat.format(date));
+                writer.append ("\r\n").write (methodtype + " http://localhost:8080/" + resource + dateFormat.format(date));
                 writer.flush ();
             }
 
@@ -104,8 +103,10 @@ public class HttpServer {
         }
 
         private void get () throws Throwable {
-            if (!("".equalsIgnoreCase(resourse))) {
-                try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream (resourse), StandardCharsets.UTF_8))) {
+            System.out.println ("Запрос на получение: " + resource);
+            response = "";
+            if (!("".equalsIgnoreCase(resource))) {
+                try (BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream (resource), StandardCharsets.UTF_8))) {
                     String str;
                     while ((str = reader.readLine ()) != null) {
                         response += str + "<br>";
@@ -115,24 +116,15 @@ public class HttpServer {
                 } catch (FileNotFoundException e) {
                     transfer (404, "Not Found", "Not Found");
                 }
-            }
-            else {transfer (200, "OK", "Hello");}
-        }
-
-        private void update (String data) throws Throwable {
-            try (FileWriter updater = new FileWriter (resourse, false)) {
-                updater.write (data);
-                updater.flush ();
-                transfer (202, "Accepted", "Success update");
-            }
-            catch ( FileNotFoundException e ) {
-                transfer (404, "Not Found", "Not Found");
+            } else {
+                transfer (200, "OK", "Hello", "GET, POST");
             }
         }
 
         private void delete ()  {
-            if (resourse.substring (0,2).equalsIgnoreCase ("id")) {
-                File file = new File (resourse);
+            System.out.println ("Запрос на удаление: " + resource);
+            if (resource.substring (0,2).equalsIgnoreCase ("id")) {
+                File file = new File (resource);
                 if (file.delete ()) {
                     transfer (202, "Accepted", "Файл успешно удален");
                 } else {
@@ -141,6 +133,77 @@ public class HttpServer {
             } else {
                 transfer (403, "Forbidden", "Error: Аccess denied");
             }
+        }
+
+        private void update (String data) throws Throwable {
+            System.out.println ("Запрос на обновление: " + resource);
+            if (!("".equalsIgnoreCase(resource))) {
+                try (FileWriter updater = new FileWriter (resource, false)) {
+                    updater.write (data);
+                    updater.flush ();
+                    transfer (202, "Accepted", "Success update");
+                } catch (FileNotFoundException e) {
+                    transfer (404, "Not Found", "Not Found");
+                }
+            } else {transfer (405, "Method Not Allowed", "Method Not Allowed", "GET, POST");}
+        }
+
+        private void post (String operator) throws Throwable {
+            System.out.println ("Сохранение файла: " + address);
+            FileWriter writer = new FileWriter ( address, false);
+            writer.write(operator);
+            transfer (201, "Created", "<p>Successfully created: your file is on "
+                    + "<a href =\""
+                    + "http://localhost:8080/" + address
+                    + "\">Ссылка</a></p>");
+            writer.flush ();
+            writer.close();
+        }
+
+        private Boolean access() throws Throwable {
+            boolean b = true;
+            try {
+                BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("General/List.txt"), StandardCharsets.UTF_8));
+                {
+                    System.out.println ("Проверка доступа к: " + resource);
+                    String str;
+                    while ((str = reader.readLine ()) != null) {
+                        if (str.equalsIgnoreCase (resource)) {
+                            b=false;
+                            transfer (403, "Forbidden", "Error: Аccess denied");
+                        }
+                    }
+                    reader.close ();
+                }
+            } catch(FileNotFoundException e) {
+                transfer (500, "Internal Server Error", "Internal Server Error");
+                b=false;
+            }
+
+            return b;
+        }
+
+        private String format (String s) {
+
+            s = s.substring ((s.indexOf ("\r\n\r\n")+4), s.length ());
+            String index = "; filename=\"";
+            String txt = s;
+            int x = txt.indexOf (index), y = index.length ();
+
+            if (x>0) {
+                txt = txt.substring (x + y, txt.length ());
+                txt = txt.substring (0, txt.indexOf ("\""));
+                txt = txt.substring (txt.indexOf ("."), txt.length ());
+            } else {
+                txt=".txt";
+            }
+            if (methodtype.equalsIgnoreCase ("POST")) {
+                address = "id" + newID (1) + txt;
+            }
+            if (s.contains ("------WebKitForm")) {
+                s = s.substring ((s.indexOf ("\r\n\r\n") + 4), s.lastIndexOf ("------WebKitForm"));
+            }
+            return s;
         }
 
         private int newID (int id) {
@@ -156,54 +219,6 @@ public class HttpServer {
             } catch (IOException e) { }
 
             return id;
-        }
-
-        private String format (String s) {
-            s=  s.substring ((s.indexOf ("\r\n\r\n")+4), s.length ());
-
-            if (s.indexOf ("------WebKitForm")>=0) {
-                s = s.substring ((s.indexOf ("\r\n\r\n") + 4), s.length ());
-                s = s.substring (0, (s.indexOf ("------WebKitForm")));
-            }
-
-            String index = "; filename=\"";
-            String txt = s;
-            int x = txt.indexOf (index);
-            int y = index.length ();
-
-            if (x>0) {
-                txt = txt.substring (x + y, txt.length ());
-                txt = txt.substring (0, txt.indexOf ("\""));
-                txt = txt.substring (txt.indexOf ("."), txt.length ());
-            } else {
-                txt=".txt";
-            }
-
-            address = "id" + newID(1) + txt;
-
-            return s;
-        }
-
-        private Boolean access() throws Throwable {
-            boolean b = true;
-            try {
-                BufferedReader reader = new BufferedReader (new InputStreamReader (new FileInputStream ("General/List.txt"), StandardCharsets.UTF_8));
-                {
-                    System.out.println (resourse);
-                    String str;
-                    while ((str = reader.readLine ()) != null) {
-                        if (str.equalsIgnoreCase (resourse)) {
-                            b=false;
-                            transfer (403, "Forbidden", "Error: Аccess denied");
-                        }
-                    }
-                    reader.close ();
-                }
-            } catch(FileNotFoundException e) {
-                transfer (500, "Internal Server Error", "Internal Server Error");
-            }
-
-            return b;
         }
 
         private void checkFL (String line) {
@@ -222,8 +237,12 @@ public class HttpServer {
                             methodtype = str;
                             break;
                         case 2:
-                            resourse = str.substring (1, str.length ());
+                            resource = str.substring (1, str.length ());
                             break;
+                        case 3:
+                            if (!str.equalsIgnoreCase (http)) {
+                                transfer (505 , "Http Version Not Supported", "Http Version Not Supported");
+                            } break;
                         default:
                             { /*do nothing*/ }
                             break;
@@ -238,9 +257,9 @@ public class HttpServer {
             }
         }
 
-        private String readRequest() throws Throwable {
+        private void readRequest() throws Throwable {
 
-            String Operator = "";
+            String operator = "";
             int streamSize = 8192;
             byte[] buffer = new byte[streamSize];
             boolean once = false;
@@ -254,20 +273,20 @@ public class HttpServer {
                     checkFL (FL);
                     while (readBytesCount == streamSize)
                     {
-                        Operator = Operator + (new String (buffer).trim ());
+                        operator = operator + (new String (buffer).trim ());
                         readBytesCount = is.read (buffer);
                     }
-                    Operator = Operator + (new String (buffer).trim ());
+                    operator = operator + (new String (buffer).trim ());
                     break;
                 }
                 else { /* Чтение потока отправленного через telnet (посимвольно) */
                     if (readBytesCount == 1 || readBytesCount > 3 ) { /*Символ или строка(для корректной работы требуется не менее 4 байт информации)*/
                         System.out.println (new String (buffer).trim ());
                         if ( (new String (buffer).trim ().length ()) == 0 ) {
-                            Operator += " ";
+                            operator += " ";
                         }
                         else {
-                            Operator += (new String (buffer).trim ());
+                            operator += new String (buffer).trim ();
                         }
                     }
                     if (readBytesCount == 2) { /*Enter*/
@@ -275,8 +294,8 @@ public class HttpServer {
                             break;
                         }
                         System.out.println ("Enter");
-                        Operator += "\r\n";
-                        checkFL (Operator);
+                        operator += "\r\n";
+                        checkFL (operator);
                         once = true;
                     }
                     else { once = false; }
@@ -287,43 +306,41 @@ public class HttpServer {
                     }
                 }
             }
-
-            Operator=format(Operator);
-
-            switch (methodtype) {
-                case "GET": {
-                    if (access ()) get ();
-                } break;
-
-                case "POST": {
-                    update (Operator);
-                } break;
-
-                case "DELETE": {
-                    if (access ()) delete ();
-                } break;
-
-//                case "POST": {
-//
-//                    FileWriter writer = new FileWriter ( address, false);
-//                    writer.write(Operator);
-//                    transfer (201, "Created", "<p>Successfully created: your file is on "
-//                            + "<a href =\""
-//                            + "http://localhost:8080/" + address
-//                            + "\">Ссылка</a></p>");
-//                    writer.flush ();
-//                    writer.close();
-//                } break;
-
-                default: {
-
-                    if (code == 100) {
-                        transfer (501, "Not Implemented", "Not Implemented");
+            operator=format(operator);
+            if (code == 100) {
+                switch (methodtype) {
+                    case "GET": {
+                        if (access ()) get ();
                     }
-                    methodtype = "Undefined";
-                } break;
+                    break;
+
+                    case "DELETE": {
+                        if (access ()) delete ();
+                    }
+                    break;
+
+                    case "UPDATE": {
+                        if (access ()) update (operator);
+                    }
+                    break;
+
+                    case "POST": {
+//                        if (!"".equalsIgnoreCase (resource))
+//                        {
+//                            if (access ()) update (operator);
+//                        }
+//                        else
+                        post (operator);
+                    }
+                    break;
+
+                    default: {
+                        transfer (501, "Not Implemented", "Not Implemented");
+                        methodtype = "Undefined";
+                    }
+                    break;
+                }
             }
-            return methodtype;
         }
     }
 }
